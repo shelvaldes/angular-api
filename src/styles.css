@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #838383; /* Color de fondo oscuro */
+    color: #f8f9fa !important; /* Color de texto claro */
+  }
+  
+  .container {
+    max-width: 100%;
+  }
+  
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  input[type="text"].form-control {
+    background-color: #495057;
+    border-color: #6c757d;
+    color: #fff;
+  }
+  
+  input[type="text"].form-control::placeholder {
+    color: #dee2e6;
+  }
+  
+  button.btn {
+    margin-right: 10px;
+  }

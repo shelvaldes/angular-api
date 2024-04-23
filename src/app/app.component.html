@@ -1,16 +1,21 @@
 <!-- src/app/app.component.html -->
-<h1>Usuarios</h1>
-<div *ngIf="errorMessage" class="alert alert-danger">
-  Error: {{ errorMessage }}
-</div>
-<div>
-  <button class="btn btn-primary" (click)="toggleZebraStyle()">Colorear</button>
-  <button class="btn btn-info" (click)="restoreOriginalState()">Restaurar</button>
-  <div class="filter-section">
-    <input type="text" [(ngModel)]="filterCountry" (ngModelChange)="applyFilter()" placeholder="Filtrar por país...">
-    <button class="btn btn-secondary" (click)="clearFilter()">Limpiar Filtro</button>
+<div class="container mt-3">
+  <h1 class="text-light">Usuarios</h1>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{ errorMessage }}
   </div>
-  
+
+  <!-- Barra de herramientas con tema oscuro -->
+  <div class="toolbar bg-dark text-light p-3 mb-2 rounded">
+    <div class="d-inline-block" >
+      <button class="btn btn-outline-light mr-2" (click)="toggleZebraStyle()">Colorear</button>
+      <button class="btn btn-outline-info mr-2" (click)="restoreOriginalState()">Restaurar</button>
+    </div>
+    <div class="filter-section form-inline">
+      <input type="text" [(ngModel)]="filterCountry" (ngModelChange)="applyFilter()" class="form-control mr-2" placeholder="Filtrar por país...">
+      <button class="btn btn-outline-secondary" (click)="clearFilter()">Limpiar Filtro</button>
+    </div>
+  </div>
 </div>
 <table class="table" [ngClass]="{'table-striped': zebraStyle}">
   <thead class="thead-dark">
