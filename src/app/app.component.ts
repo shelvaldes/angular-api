@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching data: ', error);
-        this.errorMessage = 'Unable to load users. Please try again later.';
+        this.errorMessage = 'No pudimos cargar los usuarios. Intente más tarde.';
       }
     });
   }
