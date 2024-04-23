@@ -1,4 +1,3 @@
-// src/app/app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
 import { Result } from '../models/user.model';
@@ -9,45 +8,31 @@ import { Result } from '../models/user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  originalUsers: Result[] = [];  // Array para almacenar los datos originales
-  users: Result[] = [];  // Array para mostrar y manipular los datos
-  zebraStyle: boolean = false;  // Estado para el estilo cebra
-  sortAscending: boolean = true; // estado para controlar la dirección del ordenamiento
-  errorMessage: string = '';  // Mensaje de error
-  filterCountry: string = '';  // Propiedad para el input del filtro
-
+  originalUsers: Result[] = [];
+  users: Result[] = [];
+  zebraStyle: boolean = false;
+  sortAscending: boolean = true;
+  errorMessage: string = '';
+  filterCountry: string = '';
+  currentSortColumn: string | null = null;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.fetchUsers().subscribe({
       next: (data) => {
-        this.originalUsers = data.results;  // Almacenar los datos originales
-        this.users = [...this.originalUsers];  // Copiar los datos originales a users
-        console.log(this.users);  // Ver los datos en la consola
+        this.originalUsers = data.results;
+        this.users = [...this.originalUsers];
       },
       error: (error) => {
         console.error('Error fetching data: ', error);
-        this.errorMessage = error;  // Error se muestra al usuario
+        this.errorMessage = 'Unable to load users. Please try again later.';
       }
     });
   }
 
   toggleZebraStyle() {
-    this.zebraStyle = !this.zebraStyle;  // Cambia el estado del estilo cebra
-  }
-
-  toggleSortByCountry() {
-    this.sortAscending = !this.sortAscending;
-    this.users.sort((a, b) => {
-      if (a.location.country < b.location.country) {
-        return this.sortAscending ? -1 : 1;
-      }
-      if (a.location.country > b.location.country) {
-        return this.sortAscending ? 1 : -1;
-      }
-      return 0;
-    });
+    this.zebraStyle = !this.zebraStyle;
   }
 
   deleteUser(uuid: string) {
@@ -55,26 +40,41 @@ export class AppComponent implements OnInit {
   }
 
   restoreOriginalState() {
-    this.users = [...this.originalUsers];  // Restaurar los datos originales
+    this.users = [...this.originalUsers];
+    this.applySortingAndFiltering();
   }
 
   applyFilter() {
-    if (!this.filterCountry) {
-      this.users = [...this.originalUsers];  // Sin filtro, mostrar todos los usuarios
-    } else {
-      this.users = this.originalUsers.filter(user =>
-        user.location.country.toLowerCase().includes(this.filterCountry.toLowerCase())
-      );
-    }
+    this.applySortingAndFiltering();
   }
 
   clearFilter() {
     this.filterCountry = '';
-    this.users = [...this.originalUsers];  // Restaurar el estado original sin filtro
+    this.applySortingAndFiltering();
   }
 
-  ngDoCheck() {
-    console.log(this.filterCountry); // Esto imprimirá el valor cada vez que Angular realice una detección de cambios
+  onSort(column: string) {
+    if (this.currentSortColumn === column) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.currentSortColumn = column;
+      this.sortAscending = true;
+    }
+    this.applySortingAndFiltering();
+  }
+
+  private applySortingAndFiltering() {
+    this.users = [...this.originalUsers]
+      .filter(user => !this.filterCountry || user.location.country.toLowerCase().includes(this.filterCountry.toLowerCase()))
+      .sort((a, b) => {
+        const keyA = this.currentSortColumn ? this.resolveNestedProperty(a, this.currentSortColumn) : '';
+        const keyB = this.currentSortColumn ? this.resolveNestedProperty(b, this.currentSortColumn) : '';
+        return this.sortAscending ? keyA.localeCompare(keyB) : keyB.localeCompare(keyA);
+      });
+  }
+
+  private resolveNestedProperty(obj: any, path: string) {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   }
 
 }

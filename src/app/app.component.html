@@ -16,9 +16,9 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Foto</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col" (click)="toggleSortByCountry()">País</th>
+      <th (click)="onSort('name.first')">Nombre</th>
+      <th (click)="onSort('name.last')">Apellido</th>
+      <th (click)="onSort('location.country')">País</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
