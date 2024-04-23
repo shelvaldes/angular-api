@@ -21,7 +21,7 @@
       <td>{{ user.location.country }}</td>
       <td>
         <!-- Aquí se agregarán botones para acciones como eliminar o editar -->
-        <button class="btn btn-danger btn-sm">Eliminar</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteUser(user.login.uuid)">Eliminar</button>
       </td>
     </tr>
   </tbody>

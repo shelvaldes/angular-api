@@ -45,4 +45,8 @@ export class AppComponent implements OnInit {
     });
   }
 
+  deleteUser(uuid: string) {
+    this.users = this.users.filter(user => user.login.uuid !== uuid);
+  }
+
 }
