@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   users: Result[] = [];  // Array para mostrar y manipular los datos
   zebraStyle: boolean = false;  // Estado para el estilo cebra
   sortAscending: boolean = true; // estado para controlar la dirección del ordenamiento
+  errorMessage: string = '';  // Mensaje de error
+  filterCountry: string = '';  // Propiedad para el input del filtro
 
 
   constructor(private dataService: DataService) { }
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching data: ', error);
+        this.errorMessage = error;  // Error se muestra al usuario
       }
     });
   }
@@ -53,6 +56,25 @@ export class AppComponent implements OnInit {
 
   restoreOriginalState() {
     this.users = [...this.originalUsers];  // Restaurar los datos originales
+  }
+
+  applyFilter() {
+    if (!this.filterCountry) {
+      this.users = [...this.originalUsers];  // Sin filtro, mostrar todos los usuarios
+    } else {
+      this.users = this.originalUsers.filter(user =>
+        user.location.country.toLowerCase().includes(this.filterCountry.toLowerCase())
+      );
+    }
+  }
+
+  clearFilter() {
+    this.filterCountry = '';
+    this.users = [...this.originalUsers];  // Restaurar el estado original sin filtro
+  }
+
+  ngDoCheck() {
+    console.log(this.filterCountry); // Esto imprimirá el valor cada vez que Angular realice una detección de cambios
   }
 
 }

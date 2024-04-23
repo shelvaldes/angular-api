@@ -1,8 +1,16 @@
 <!-- src/app/app.component.html -->
 <h1>Usuarios</h1>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>
 <div>
   <button class="btn btn-primary" (click)="toggleZebraStyle()">Colorear</button>
   <button class="btn btn-info" (click)="restoreOriginalState()">Restaurar</button>
+  <div class="filter-section">
+    <input type="text" [(ngModel)]="filterCountry" (ngModelChange)="applyFilter()" placeholder="Filtrar por país...">
+    <button class="btn btn-secondary" (click)="clearFilter()">Limpiar Filtro</button>
+  </div>
+  
 </div>
 <table class="table" [ngClass]="{'table-striped': zebraStyle}">
   <thead class="thead-dark">
@@ -27,3 +35,5 @@
     </tr>
   </tbody>
 </table>
+
+
