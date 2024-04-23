@@ -1,27 +1,53 @@
-# AngularApi
+# Aplicación de Usuarios Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Esta aplicación es un proyecto desarrollado en Angular que permite a los usuarios ver y manipular una lista de usuarios. Ofrece funcionalidades como filtrar, ordenar y modificar el estilo visual de la tabla de usuarios.
 
-## Development server
+## Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Filtrar Usuarios**: Los usuarios pueden filtrar la lista de usuarios por país utilizando un campo de texto.
+- **Ordenar Usuarios**: Los usuarios pueden ordenar la lista de usuarios haciendo clic en los encabezados de las columnas.
+- **Estilo Zebra**: Los usuarios pueden alternar el estilo zebra para las filas de la tabla para mejorar la legibilidad.
+- **Eliminar Usuarios**: Los usuarios pueden eliminar usuarios de la lista.
+- **Restaurar Estado Original**: Permite a los usuarios restaurar la lista de usuarios a su estado original después de cualquier manipulación.
 
-## Code scaffolding
+## Tecnologías Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular**: Framework de desarrollo para construir la aplicación.
+- **RxJS**: Para manejar operaciones asíncronas y eventos.
+- **Bootstrap**: Utilizado para estilizar la aplicación y hacerla responsiva.
 
-## Build
+## Configuración del Proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para ejecutar este proyecto en tu máquina local, necesitas tener instalado [Node.js](https://nodejs.org/) y el Angular CLI. Sigue los pasos a continuación para configurar el proyecto:
 
-## Running unit tests
+### Prerrequisitos
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Asegúrate de tener instalado Node.js y npm (incluido con Node.js) en tu sistema. Puedes verificar las versiones instaladas con:
 
-## Running end-to-end tests
+```
+node --version
+npm --version
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Instalación de Angular CLI
+Si aún no tienes Angular CLI instalado, puedes instalarlo globalmente en tu sistema con npm:
 
-## Further help
+```
+npm install -g @angular/cli
+```
+### Configuración del Repositorio
+Clona el repositorio en tu máquina local:
+```
+git clone https://tu-repositorio.com/path/to/repo.git
+cd repo-directory
+```
+Instala las dependencias del proyecto:
+```
+npm install
+```
+Ejecuta la aplicación:
+```
+ng serve
+```
+Navega a http://localhost:4200/ en tu navegador para ver la aplicación en funcionamiento.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
