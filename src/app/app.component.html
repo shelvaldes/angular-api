@@ -1,6 +1,25 @@
+<!-- src/app/app.component.html -->
 <h1>Usuarios</h1>
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.name.first }} {{ user.name.last }}
-  </li>
-</ul>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Foto</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">País</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td><img [src]="user.picture.thumbnail" alt="user photo" class="img-thumbnail"></td>
+      <td>{{ user.name.first }}</td>
+      <td>{{user.name.last }}</td>
+      <td>{{ user.location.country }}</td>
+      <td>
+        <!-- Aquí se agregarán botones para acciones como eliminar o editar -->
+        <button class="btn btn-danger btn-sm">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

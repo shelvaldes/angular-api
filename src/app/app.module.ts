@@ -1,8 +1,7 @@
-// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // Importar HttpClientModule
-import { RouterModule, Routes } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http'; //este
+import { RouterModule, Routes } from '@angular/router'; // Importa RouterModule y Routes
 import { AppComponent } from './app.component';
 
 // Configuración de rutas básica (vacía)
@@ -14,7 +13,8 @@ const routes: Routes = [];
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, // Añadir HttpClientModule aquí
+    HttpClientModule, //este
+    RouterModule.forRoot(routes), // Importa RouterModule y configura las rutas
   ],
   providers: [],
   bootstrap: [AppComponent]
