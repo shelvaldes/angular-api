@@ -9,7 +9,8 @@ import { Result } from '../models/user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  users: Result[] = [];
+  originalUsers: Result[] = [];  // Array para almacenar los datos originales
+  users: Result[] = [];  // Array para mostrar y manipular los datos
   zebraStyle: boolean = false;  // Estado para el estilo cebra
   sortAscending: boolean = true; // estado para controlar la dirección del ordenamiento
 
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.dataService.fetchUsers().subscribe({
       next: (data) => {
-        this.users = data.results;
+        this.originalUsers = data.results;  // Almacenar los datos originales
+        this.users = [...this.originalUsers];  // Copiar los datos originales a users
         console.log(this.users);  // Ver los datos en la consola
       },
       error: (error) => {
@@ -47,6 +49,10 @@ export class AppComponent implements OnInit {
 
   deleteUser(uuid: string) {
     this.users = this.users.filter(user => user.login.uuid !== uuid);
+  }
+
+  restoreOriginalState() {
+    this.users = [...this.originalUsers];  // Restaurar los datos originales
   }
 
 }

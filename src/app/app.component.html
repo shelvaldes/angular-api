@@ -1,7 +1,8 @@
 <!-- src/app/app.component.html -->
 <h1>Usuarios</h1>
 <div>
-  <button class="btn btn-primary" (click)="toggleZebraStyle()">Toggle Zebra Style</button>
+  <button class="btn btn-primary" (click)="toggleZebraStyle()">Colorear</button>
+  <button class="btn btn-info" (click)="restoreOriginalState()">Restaurar</button>
 </div>
 <table class="table" [ngClass]="{'table-striped': zebraStyle}">
   <thead class="thead-dark">
