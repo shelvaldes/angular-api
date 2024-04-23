@@ -1,6 +1,9 @@
 <!-- src/app/app.component.html -->
 <h1>Usuarios</h1>
-<table class="table">
+<div>
+  <button class="btn btn-primary" (click)="toggleZebraStyle()">Toggle Zebra Style</button>
+</div>
+<table class="table" [ngClass]="{'table-striped': zebraStyle}">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Foto</th>

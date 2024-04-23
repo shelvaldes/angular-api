@@ -1,6 +1,7 @@
 // src/app/app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
+import { Result } from '../models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  users: any[] = [];
+  users: Result[] = [];
+  zebraStyle: boolean = false;  // Estado para el estilo cebra
+
 
   constructor(private dataService: DataService) { }
 
@@ -23,4 +26,9 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  toggleZebraStyle() {
+    this.zebraStyle = !this.zebraStyle;  // Cambia el estado del estilo cebra
+  }
+
 }
